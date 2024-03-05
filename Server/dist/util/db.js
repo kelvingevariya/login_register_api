@@ -36,52 +36,31 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.storeData = exports.arrayOfUsers = void 0;
-var mailModule = require("./mailerFunc");
-var bcrypt = require("bcryptjs");
-var Joi = require('joi');
-var user_1 = require("../Schema/user");
-var userDataJSON_json_1 = require("../../../Data/userDataJSON.json");
-exports.arrayOfUsers = [];
-exports.arrayOfUsers.push.apply(exports.arrayOfUsers, userDataJSON_json_1.default);
-function storeData(req, res) {
+exports.connectDB = void 0;
+var mongoose_1 = require("mongoose");
+var globals_1 = require("../globals");
+function connectDB() {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, username, email, userPass, role, mailQuery, userExists, password;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
+        var error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
-                    _a = req.body, username = _a.username, email = _a.email, userPass = _a.userPass, role = _a.role;
-                    mailQuery = user_1.registers.findOne({ email: "".concat(email) }, { email: 1, _id: 0 });
-                    return [4 /*yield*/, mailQuery.exec()];
+                    _a.trys.push([0, 2, , 3]);
+                    //@ts-ignore
+                    return [4 /*yield*/, mongoose_1.default.connect("".concat(process.env.URI, "/").concat(globals_1.dbName))];
                 case 1:
-                    userExists = _b.sent();
-                    if (!userExists) return [3 /*break*/, 2];
-                    res.status(400).json({ error: "User Already Exist" });
-                    return [3 /*break*/, 5];
-                case 2: return [4 /*yield*/, bcrypt.hash(userPass, 10)];
-                case 3:
-                    password = _b.sent();
-                    //*Email 
-                    // mailModule.sendMail(userName, email, userPass)
-                    //* Adding the user to the file JSON or db 
-                    return [4 /*yield*/, user_1.registers.insertMany({ username: username, email: email, password: password, role: role }).then(function () {
-                            res.status(201).json({ status: "Data Stored" });
-                        })
-                        // arrayOfUsers.push({ userId: id, userName: userName, userPassword: passHashed, email: email, role: role })
-                        // await fs.writeFile('../Data/userDataJSON.json', JSON.stringify(arrayOfUsers), (err, data) => {
-                        //     res.status(201).json({ messege: `Stored` })
-                        // })
-                    ];
-                case 4:
-                    //*Email 
-                    // mailModule.sendMail(userName, email, userPass)
-                    //* Adding the user to the file JSON or db 
-                    _b.sent();
-                    _b.label = 5;
-                case 5: return [2 /*return*/];
+                    //@ts-ignore
+                    _a.sent();
+                    console.log("Connected to the Db");
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_1 = _a.sent();
+                    console.log("failed to connect to the database");
+                    process.exit(0);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
             }
         });
     });
 }
-exports.storeData = storeData;
-module.exports = { storeData: storeData, arrayOfUsers: exports.arrayOfUsers };
+exports.connectDB = connectDB;

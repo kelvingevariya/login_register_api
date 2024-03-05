@@ -1,45 +1,22 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const express = __importStar(require("express"));
-const router = express.Router();
-const register = require("../Controller/userData");
-const loginUser = require("../Controller/auth");
-const arr = require("../Controller/userData");
-const userLogged_1 = require("../Middleware/userLogged");
-const validator_1 = require("../Middleware/validator");
-const admin_1 = require("../Middleware/admin");
-router.post("/register", validator_1.validator, (req, res) => {
+var express = require('express');
+var router = express.Router();
+var register = require("../Controller/userData");
+var loginUser = require("../Controller/auth");
+var arr = require("../Controller/userData");
+var userLogged_1 = require("../Middleware/userLogged");
+var validator_1 = require("../Middleware/validator");
+var admin_1 = require("../Middleware/admin");
+router.post("/register", validator_1.validator, function (req, res) {
     //* Fuction store data to register the user
     register.storeData(req, res);
 });
-router.post("/login", (req, res) => {
+router.post("/login", function (req, res) {
     loginUser.authUser(req, res);
 });
-router.get("/home", userLogged_1.userLogged, (req, res) => {
+router.get("/home", userLogged_1.userLogged, function (req, res) {
 });
-router.get("/users", admin_1.adminLogged, (req, res) => {
+router.get("/users", admin_1.adminLogged, function (req, res) {
 });
 module.exports = router;

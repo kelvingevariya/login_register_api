@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "test": "mocha './test/**.**.js'",
-    "build": "tsc index.ts",
+    "build": "tsc ./src/**/**.ts --outDir dist",
     "dev": "nodemon  src/index.ts",
     "start": "node index.js"
   },
