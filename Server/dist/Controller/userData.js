@@ -36,23 +36,19 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.storeData = exports.arrayOfUsers = void 0;
+exports.storeData = void 0;
 var mailModule = require("./mailerFunc");
 var bcrypt = require("bcryptjs");
 var Joi = require('joi');
 var user_1 = require("../Schema/user");
-var userDataJSON_json_1 = require("../../../Data/userDataJSON.json");
-exports.arrayOfUsers = [];
-exports.arrayOfUsers.push.apply(exports.arrayOfUsers, userDataJSON_json_1.default);
 function storeData(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, username, email, userPass, role, mailQuery, userExists, password;
+        var _a, username, email, userPass, role, userExists, password;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
                     _a = req.body, username = _a.username, email = _a.email, userPass = _a.userPass, role = _a.role;
-                    mailQuery = user_1.registers.findOne({ email: "".concat(email) }, { email: 1, _id: 0 });
-                    return [4 /*yield*/, mailQuery.exec()];
+                    return [4 /*yield*/, user_1.registers.findOne({ email: email }, { email: 1, _id: 0 })];
                 case 1:
                     userExists = _b.sent();
                     if (!userExists) return [3 /*break*/, 2];
@@ -84,4 +80,3 @@ function storeData(req, res) {
     });
 }
 exports.storeData = storeData;
-module.exports = { storeData: storeData, arrayOfUsers: exports.arrayOfUsers };

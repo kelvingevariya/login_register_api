@@ -36,14 +36,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var nodemailer_1 = require("nodemailer");
+var nodemailer = require("nodemailer");
 function sendMail(userName, email, password) {
     return __awaiter(this, void 0, void 0, function () {
         var transporter, info;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    transporter = nodemailer_1.default.createTransport({
+                    transporter = nodemailer.createTransport({
                         //@ts-ignore
                         host: process.env.MAIL_HOST,
                         port: process.env.MAIL_PORT,

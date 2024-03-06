@@ -5,15 +5,12 @@ const Joi = require('joi');
 
 
 import { registers } from "../Schema/user";
-import { v4 as uuidv4 } from 'uuid';
-import userDataJSON from "../../../Data/userDataJSON.json"
+
+
 
 import { NextFunction, Request, Response } from "express";
 
-interface userData { userId?: string, userName?: string, userPassword?: string, email?: string, token?: string, role?: string }
 
-export let arrayOfUsers: userData[] = []
-arrayOfUsers.push(...userDataJSON)
 
 
 
@@ -58,6 +55,5 @@ export async function storeData(req: Request, res: Response) {
 
 
 
-module.exports = { storeData, arrayOfUsers };
 
 

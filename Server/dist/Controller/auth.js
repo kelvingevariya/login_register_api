@@ -43,7 +43,7 @@ var bcrypt = require("bcryptjs");
 var arr = require("./userData");
 function authUser(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var loginEmail, loginPassword, findQuery, userExists, isPassSame, token, cookieOption, error_1;
+        var loginEmail, loginPassword, userExists, isPassSame, token, cookieOption, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -54,13 +54,11 @@ function authUser(req, res) {
                     return [3 /*break*/, 7];
                 case 1:
                     _a.trys.push([1, 6, , 7]);
-                    findQuery = user_1.registers.findOne({ email: "".concat(loginEmail) });
-                    return [4 /*yield*/, findQuery.exec()];
+                    return [4 /*yield*/, user_1.registers.findOne({ email: loginEmail })];
                 case 2:
                     userExists = _a.sent();
                     console.log(userExists);
                     if (!userExists) return [3 /*break*/, 4];
-                    userExists;
                     return [4 /*yield*/, bcrypt.compare(loginPassword, userExists.password)];
                 case 3:
                     isPassSame = _a.sent();

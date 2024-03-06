@@ -42,13 +42,12 @@ var jwt = require("jsonwebtoken");
 var arr = require("../Controller/userData");
 function adminLogged(req, res, next) {
     return __awaiter(this, void 0, void 0, function () {
-        var allDataQuery, allData_1, err_1;
+        var allData_1, err_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    allDataQuery = user_1.registers.find({});
-                    return [4 /*yield*/, allDataQuery.exec()];
+                    return [4 /*yield*/, user_1.registers.find({})];
                 case 1:
                     allData_1 = _a.sent();
                     jwt.verify(req.cookies.token, process.env.secret_key, function (err, decoded) {
@@ -57,7 +56,6 @@ function adminLogged(req, res, next) {
                         }
                         else {
                             res.status(401).json({ error: "Not Authorized person" });
-                            console.log(decoded);
                         }
                     });
                     return [3 /*break*/, 3];
