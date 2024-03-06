@@ -26,8 +26,8 @@ export async function storeData(req: Request, res: Response) {
 
     //* If user is already present 
     // const userExists = await arrayOfUsers.some((key) => key.email === email)
-    const mailQuery = registers.findOne({ email: `${email}` }, { email: 1, _id: 0 });
-    const userExists = await mailQuery.exec();
+    const userExists = await registers.findOne({ email: email }, { email: 1, _id: 0 });
+
 
     if (userExists) {
         res.status(400).json({ error: `User Already Exist` })

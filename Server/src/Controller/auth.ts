@@ -43,13 +43,13 @@ export async function authUser(req: Request, res: Response) {
           })*/
 
         try {
-            const findQuery = registers.findOne({ email: `${loginEmail}` });
-            const userExists = await findQuery.exec();
+            const userExists = await registers.findOne({ email: loginEmail });
+
 
             console.log(userExists);
 
             if (userExists) {
-                userExists
+
                 const isPassSame = await bcrypt.compare(loginPassword, userExists.password)
                 if (!isPassSame) {
                     res.status(404).json({ error: "Password Not Matched" })
